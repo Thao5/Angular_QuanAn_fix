@@ -1,0 +1,80 @@
+<div class="d-flex justify-content-around align-items-center mb-4" style="width: 65%; height: 83vh; text-align: center; margin: 2rem 2rem 5rem 15rem;">
+  <section>
+      <div class="container py-5 h-100">
+        <div class="row d-flex align-items-center justify-content-center h-100">
+          <div class="col-md-8 col-lg-7 col-xl-6">
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+              class="img-fluid" alt="Phone image">
+          </div>
+          <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+            <form [formGroup]="datBanForm" (submit)="datBan($event)">
+              <!-- FirstName input -->
+              <div class="form-floating mb-4">
+                <input type="text" id="idChiNhanh" class="form-control form-control-lg" formControlName=idChiNhanh/>
+                <label class="form-label" for="idChiNhanh">Chi Nhánh</label>
+              </div>
+
+              <!-- LastName input -->
+              <div class="form-floating mb-4">
+                <input type="text" id="idBan" class="form-control form-control-lg" formControlName=idBan [defaultValue]="idB" />
+                <label class="form-label" for="idBan">Bàn Số</label>
+              </div>
+
+              <div class="form-floating mb-4">
+                <input type="text" id="moTaBan" class="form-control form-control-lg" formControlName=moTaBan [defaultValue]="moTaBan" />
+                <label class="form-label" for="moTaBan">Mô tả bàn</label>
+              </div>
+
+              <div class="form-floating mb-4">
+                <input type="text" id="hoTen" class="form-control form-control-lg" formControlName=hoTen [defaultValue]="hoTen" />
+                <label class="form-label" for="hoTen">Họ tên</label>
+              </div>
+
+              <!-- Username input -->
+              <div class="form-floating mb-4">
+                <input type="text" id="User" class="form-control form-control-lg" formControlName=idNguoiDat/>
+                <label class="form-label" for="User">Tên Người Đặt</label>
+              </div>
+
+              <!-- Password input -->
+              <div class="form-floating mb-4">
+                <input type="text" id="note" class="form-control form-control-lg" formControlName=moTa/>
+                <label class="form-label" for="note">Ghi Chú</label>
+                <div  *ngIf="mt && mt.invalid && mt.touched">
+                  <small id="moTaError" class="form-text  text-danger">Ghi Chú Required, Nếu Không có Ghi Không</small>
+                </div>
+              </div>
+               <div class="form-floating mb-4">
+                <input type="datetime" id="date" class="form-control form-control-lg" formControlName=ngayDat/>
+                <label class="form-label" for="date">Ngày Đặt</label>
+              </div>
+              <div class="form-floating mb-4">
+                <input type="date" id="dateRec" class="form-control form-control-lg" formControlName=ngayNhan/>
+                <label class="form-label" for="dateRec">Ngày Hứa Nhận</label>
+                <div  *ngIf="nn && nn.invalid && nn.touched">
+                  <small id="DateNhanError" class="form-text  text-danger">Vui Lòng Chọn Ngày</small>
+                </div>
+                <div  *ngIf="datBanForm.errors?.['valuesError']">
+                  <small id="DateNhanErrorSmaller" class="form-text  text-danger">Không được chọn nhỏ hơn ngày đặt</small>
+                </div>
+              </div>
+
+              <!-- Submit button -->
+              <button type="submit" [disabled]="loading || datBanForm.invalid" class="btn btn-primary btn-lg btn-block" style="width: 100%;">
+                <ng-container *ngIf="loading">
+                  <app-my-spinner />
+                </ng-container>
+                <ng-container *ngIf="!loading">
+                  Đặt Bàn
+                </ng-container>
+              </button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+</div>
+

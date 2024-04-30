@@ -1,0 +1,53 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container">
+<div class="be-comment-block">
+	<h1 class="comments-title">Comments</h1>
+	<div class="be-comment" *ngFor="let c of comment">
+		<div class="be-img-comment">
+				<img src={{c.idNguoiDung.avatar}} alt="" class="be-ava-comment">
+		</div>
+		<div class="be-comment-content">
+
+				<span class="be-comment-name">
+					{{c.idNguoiDung.lastName}} {{c.idNguoiDung.firstName}}
+					</span>
+				<span class="be-comment-time">
+					<i class="fa fa-clock-o"></i>
+					{{ getCommentCreatedDate(c) }}
+				</span>
+
+			<p class="be-comment-text">
+				{{c.noiDung}}
+			</p>
+		</div>
+	</div>
+</div>
+</div>
+<div id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div role="document">
+      <div>
+          <!-- <div class="text-right cross"> <i class="fa fa-times mr-2"></i> </div> -->
+          <div class="card-body text-center"> <img src=" https://i.imgur.com/d2dKtI7.png" height="100" width="100">
+              <div class="comment-box text-center">
+              <h4>Add a comment</h4>
+              <div class="rating">
+                 <input type="radio" name="rating" value="5" id="5" [formControl]="danhGia">
+                 <label for="5">☆</label>
+                  <input type="radio" name="rating" value="4" id="4" [formControl]="danhGia">
+                 <label for="4">☆</label>
+                 <input type="radio" name="rating" value="3" id="3" [formControl]="danhGia">
+                 <label for="3">☆</label>
+                  <input type="radio" name="rating" value="2" id="2" [formControl]="danhGia">
+                  <label for="2">☆</label>
+                   <input type="radio" name="rating" value="1" id="1" [formControl]="danhGia">
+                   <label for="1">☆</label>
+                </div>
+              <div class="comment-area"> <textarea [value]="cont" (change)="onChange()" class="form-control" placeholder="what is your view?" rows="4" [formControl]="noiDung"></textarea> </div>
+
+                  <div class="text-center mt-4"> <button (click)="addComment()" class="btn btn-success send px-5">Send message <i class="fa fa-long-arrow-right ml-1"></i></button>
+          </div>
+          </div>
+      </div>
+  </div>
+</div>
+</div>

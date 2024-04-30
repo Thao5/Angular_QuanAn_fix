@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@1,100;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montez&family=Montserrat+Alternates:ital,wght@1,100;1,900&display=swap');
+*{
+    font-family: 'Montserrat Alternates', sans-serif;
+}
+
+/* Carousel styling */
+#introCarousel,
+.carousel-inner,
+.carousel-item,
+.carousel-item.active {
+  height: 100vh;
+}
+
+.carousel-item:nth-child(1) {
+  background-image: url('https://cdn.sanity.io/images/pmfmd3fy/production/1890f490a2c058a1610182b8153e5cd6cc5686aa-1996x3000.jpg?w=2048&q=90&auto=format');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+.carousel-item:nth-child(2) {
+  background-image: url('https://media.istockphoto.com/id/1307190527/photo/happy-waiter-serving-food-to-group-of-friends-in-a-pub.jpg?s=612x612&w=0&k=20&c=EDqQ0oBcpFGV25p61vWUF5N-6lRJdbmZmQMe5kyuxyA=');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+.carousel-item:nth-child(3) {
+  background-image: url('https://img.freepik.com/premium-photo/photo-closeup-shot-delicious-food_829042-89.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+/* Height for devices larger than 576px */
+@media (min-width: 992px) {
+  #introCarousel {
+    margin-top: -58.59px;
+  }
+  #introCarousel,
+  .carousel-inner,
+  .carousel-item,
+  .carousel-item.active {
+    height: 50vh;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  #resDes{
+    display: none;
+  }
+  #social {
+      align-self: center;
+      margin-top: 20px;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  #resMob{
+    display: none;
+  }
+}
+
+.navbar .nav-link {
+  color: #fff !important;
+  margin-left: 3px;
+}
+
+.nav-1:hover {
+    box-shadow: 5px 5px 10px 2px #000;
+}
+
+.btn-shadow{
+    background-color: green;
+}
+
+.btn-shadow:hover {
+    background-color: rgb(1, 97, 1);
+}
+
+.tg-backdrop{
+    pointer-events:none!important;
+  }
+
+#btncss:focus-within{
+  border: 1px !important;
+  border-color: white !important;
+  outline: auto;
+}

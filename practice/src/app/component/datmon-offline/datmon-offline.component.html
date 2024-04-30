@@ -1,0 +1,42 @@
+<hr class="my-5" />
+
+      <!--Section: Content-->
+      <section class="text-center">
+        <h4 class="mb-5"><strong>MENU</strong>
+          <hr class="hr hr-blurry" />
+        </h4>
+        <!-- <div class="row justify-content-center" >
+          <div class="col " *ngFor="let c of cates">
+            <button class="btn btn-outline-dark">{{c.name}}</button>
+          </div>
+          <hr class="hr hr-blurry mt-5" />
+        </div> -->
+        <ng-container *ngIf="loading">
+          <app-my-spinner />
+        </ng-container>
+        <ng-container *ngIf="!loading">
+        <div class="row">
+          <div class="col-lg-4 col-md-12 mb-4" *ngFor="let f of foods">
+            <div class="card">
+              <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                <img
+                  src={{f.image}}
+                  class="img-fluid w-50 h-50"
+                />
+                <a href="#!">
+                  <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                </a>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">{{f.name}}</h5>
+                <p class="card-text">
+                  {{f.price}}
+                </p>
+                <button (click)="addCart(f)" class="btn btn-primary">Đặt món</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        </ng-container>
+      </section>

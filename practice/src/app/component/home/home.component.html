@@ -1,0 +1,397 @@
+<!-- <head>
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous"
+  />
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"
+  ></script>
+</head> -->
+<head>
+  <link
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+    rel="stylesheet"
+  />
+</head>
+
+<!--Main layout-->
+<ng-container *ngIf="user.vaiTro === 'ban'">
+  <app-chon-ban />
+</ng-container>
+<ng-container *ngIf="user.vaiTro !== 'ban'">
+  <main class="mt-5">
+    <div class="container">
+      <!--Section: Content-->
+      <section>
+        <div class="row">
+          <h4 class="mb-5 text-center">
+            <strong>GIỚI THIỆU</strong>
+            <hr class="hr hr-blurry" />
+          </h4>
+          <div class="col-md-6 gx-5 mb-4">
+            <div
+              class="bg-image hover-overlay ripple shadow-2-strong rounded-5"
+              data-mdb-ripple-color="light"
+            >
+              <img
+                src="https://mdbootstrap.com/img/new/slides/031.jpg"
+                class="img-fluid"
+              />
+              <a href="#!">
+                <div
+                  class="mask"
+                  style="background-color: rgba(251, 251, 251, 0.15)"
+                ></div>
+              </a>
+            </div>
+          </div>
+
+          <div class="col-md-6 gx-5 mb-4">
+            <h4><strong>QUÁN ĂN NHOAM NHOAM</strong></h4>
+            <p class="text-muted">
+              Là quán ăn chuyên cung cấp văn hóa ẩm thực Việt Nam nói riêng, văn
+              hóa ẩm thực thế giới nói chung. Chúng tôi cũng cung cấp ẩm thực
+              Việt Nam nói riêng và ẩm thực thế giới nói chung
+            </p>
+            <p>
+              <strong>HỆ THỐNG QUÁN ĂN TIỆN LỢI, KHÔNG GIAN THOẢI MÁI</strong>
+            </p>
+            <p class="text-muted">
+              Hệ thống bao gồm một cơ sở dữ liệu rõ ràng, quản lý hệ thống chặt
+              chẽ, cung cấp các giao diện tiện ích – thoải mái – thân thiện cho
+              người dung có thể sử dụng cũng như một hệ thống bảo mật tốt để
+              người dùng có thể đăng ký- đăng nhập ứng dụng sử dụng các dịch vụ
+              của hệ thống quán ăn một cách yên tâm và tin cậy nhất
+            </p>
+          </div>
+        </div>
+      </section>
+      <!--Section: Content-->
+
+      <hr class="my-5" />
+
+      <!--Section: Content-->
+      <section class="text-center">
+        <h4 class="mb-5">
+          <strong>MENU</strong>
+          <hr class="hr hr-blurry" />
+        </h4>
+        <!-- <div class="row justify-content-center" >
+          <div class="col " *ngFor="let c of cates">
+            <button class="btn btn-outline-dark">{{c.name}}</button>
+          </div>
+          <hr class="hr hr-blurry mt-5" />
+        </div> -->
+        <ng-container *ngIf="loading">
+          <app-my-spinner />
+        </ng-container>
+        <ng-container *ngIf="!loading">
+          <div class="row">
+            <div
+              class="col-lg-4 col-md-12 mb-4"
+              *ngFor="
+                let f of foods | paginate : { itemsPerPage: 6, currentPage: p }
+              "
+            >
+              <div class="card">
+                <div
+                  class="bg-image hover-overlay ripple"
+                  data-mdb-ripple-color="light"
+                >
+                  <img src="{{ f.image }}" class="img-fluid w-50 h-50" />
+                  <a href="#!">
+                    <div
+                      class="mask"
+                      style="background-color: rgba(251, 251, 251, 0.15)"
+                    ></div>
+                  </a>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">{{ f.name }}</h5>
+                  <p class="card-text">
+                    {{ f.price }}
+                  </p>
+                  <button (click)="addCart(f)" class="btn btn-primary me-2">
+                    Đặt món
+                  </button>
+                  <!-- <button (click)="detailFood(f)" class="btn btn-primary">
+                    Xem chi tiết
+                  </button> -->
+                  <!-- Button trigger modal -->
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    attr.data-bs-target="#foodDetail_{{ f.id }}"
+                  >
+                    Xem Chi Tiết
+                  </button>
+                </div>
+              </div>
+              <!-- Modal -->
+              <div
+                class="modal fade"
+                id="foodDetail_{{ f.id }}"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="Food_{{ f.id }}">
+                        {{ f.name }}
+                      </h1>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">
+                      <!-- Product section-->
+
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-sm">
+                            <section class="py-5">
+                              <div
+                                *ngIf="loading === false"
+                                class="container px-4 px-lg-5 my-5"
+                              >
+                                <div
+                                  class="row gx-4 gx-lg-5 align-items-center"
+                                >
+                                  <div class="col-md-6">
+                                    <img
+                                      src="{{ f.image }}"
+                                      class="card-img-top mb-5 mb-md-0"
+                                      alt="{{ f.name }}"
+                                    />
+                                  </div>
+                                  <div class="col-md-6">
+                                    <h3 class="display-7 fw-bolder text-start">
+                                      {{ f.name }}
+                                    </h3>
+                                    <div class="fs-5 mb-3 text-start">
+                                      <span>${{ f.price }}</span>
+                                    </div>
+
+                                    <div class="d-flex justify-content-start">
+                                      <input
+                                      (change)="onChangeQuan(quan.value)"
+                                        class="form-control text-center me-3"
+                                        id="inputQuantity"
+                                        type="num"
+                                        [value]="quantity" #quan
+                                        style="max-width: 3rem"
+                                      />
+                                      <span
+                                        (click)="onPlus()"
+                                        class="plus bg-dark me-3"
+                                        >+</span
+                                      >
+                                      <span
+                                        (click)="onMinus()"
+                                        class="minus bg-dark me-3"
+                                        >-</span
+                                      >
+
+                                      <!-- <button
+                                        (click)="addCart(food)"
+                                        class="btn btn-outline-dark flex-shrink-0"
+                                        type="button"
+                                      >
+                                        <i class="bi-cart-fill me-1"></i>
+                                        Add to cart
+                                      </button> -->
+                                    </div>
+                                  </div>
+                                  <h5 class="fs-5 mb-2 mt-2 text-start">
+                                    Description
+                                  </h5>
+                                  <p class="lead text-start anyClass">
+                                    Lorem ipsum dolor sit amet consectetur
+                                    adipisicing elit. Praesentium at dolorem
+                                    quidem modi. Nam sequi consequatur obcaecati
+                                    excepturi alias magni, accusamus eius
+                                    blanditiis delectus ipsam minima ea iste
+                                    laborum vero?
+                                  </p>
+                                </div>
+                              </div>
+                            </section>
+                          </div>
+                          <div class="vr vr-blurry" style="height: auto;"></div>
+                          <div class="col-sm">
+                            <div class="container commentScroll">
+                              <div class="be-comment-block">
+                                <!-- <h1 class="comments-title">Comments</h1> -->
+                                <div
+                                  class="be-comment"
+                                  *ngFor="let c of comment"
+                                >
+                                  <div class="be-img-comment">
+                                    <img
+                                      src="{{ c.idNguoiDung.avatar }}"
+                                      alt=""
+                                      class="be-ava-comment"
+                                    />
+                                  </div>
+                                  <div class="be-comment-content">
+                                    <span class="be-comment-name">
+                                      {{ c.idNguoiDung.lastName }}
+                                      {{ c.idNguoiDung.firstName }}
+                                    </span>
+                                    <span class="be-comment-time">
+                                      <i class="fa fa-clock-o"></i>
+                                      {{ getCommentCreatedDate(c) }}
+                                    </span>
+
+                                    <p class="be-comment-text">
+                                      {{ c.noiDung }}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div
+                              id="form"
+                              tabindex="-1"
+                              role="dialog"
+                              aria-labelledby="exampleModalLabel"
+                              aria-hidden="true"
+                            >
+                              <div role="document">
+                                <div>
+                                  <!-- <div class="text-right cross"> <i class="fa fa-times mr-2"></i> </div> -->
+                                  <div class="card-body text-center">
+                                    <img
+                                      src=" https://i.imgur.com/d2dKtI7.png"
+                                      height="100"
+                                      width="100"
+                                    />
+                                    <div class="comment-box text-center">
+                                      <h4>Add a comment</h4>
+                                      <div class="rating">
+                                        <input
+                                          type="radio"
+                                          name="rating"
+                                          value="5"
+                                          id="5"
+                                          [formControl]="danhGia"
+                                        />
+                                        <label for="5">☆</label>
+                                        <input
+                                          type="radio"
+                                          name="rating"
+                                          value="4"
+                                          id="4"
+                                          [formControl]="danhGia"
+                                        />
+                                        <label for="4">☆</label>
+                                        <input
+                                          type="radio"
+                                          name="rating"
+                                          value="3"
+                                          id="3"
+                                          [formControl]="danhGia"
+                                        />
+                                        <label for="3">☆</label>
+                                        <input
+                                          type="radio"
+                                          name="rating"
+                                          value="2"
+                                          id="2"
+                                          [formControl]="danhGia"
+                                        />
+                                        <label for="2">☆</label>
+                                        <input
+                                          type="radio"
+                                          name="rating"
+                                          value="1"
+                                          id="1"
+                                          [formControl]="danhGia"
+                                        />
+                                        <label for="1">☆</label>
+                                      </div>
+                                      <div class="comment-area ">
+                                        <textarea
+                                          [value]="cont"
+                                          (change)="onChange()"
+                                          class="form-control"
+                                          placeholder="what is your view?"
+                                          rows="4"
+                                          [formControl]="noiDung"
+                                        ></textarea>
+                                      </div>
+
+                                      <div class="text-center mt-4">
+                                        <button
+                                          (click)="addComment()"
+                                          class="btn btn-success send px-5"
+                                        >
+                                          Send message
+                                          <i
+                                            class="fa fa-long-arrow-right ml-1"
+                                          ></i>
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                      <button (click)="addCartDetail(f)" type="button" class="btn btn-outline-success">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                          <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                        </svg>
+                        Add to cart
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-outline-danger"
+                        data-bs-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </ng-container>
+      </section>
+      <!--Section: Content-->
+
+      <hr class="my-5" />
+
+      <!--Section: Content-->
+      <!-- <section class="mb-5">
+        <h4 class="mb-5 text-center"><strong>Contact Us:</strong></h4>
+
+        <div class="row d-flex justify-content-center">
+          <h5>SỐ ĐIỆN THOẠI: 0787940318</h5>
+          <h5>TÊN: TRỊNH MINH HIẾU</h5>
+          <h5>CHI NHÁNH 4</h5>
+          <h5>ĐỊA CHỈ: ABCXYZ</h5>
+        </div>
+      </section> -->
+      <!--Section: Content-->
+    </div>
+  </main>
+</ng-container>
+<!--Main layout-->

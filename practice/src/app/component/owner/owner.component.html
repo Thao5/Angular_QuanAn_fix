@@ -1,0 +1,227 @@
+<div class="nav justify-content-center align-items-center text-center w-auto">
+  <tabset [justified]="true">
+    <tab heading="GeeksforGeeks" class="mt-4 w-auto">
+      <!--Section: Content-->
+      <section class="text-center">
+        <div class="position-relative">
+          <h4 class="mb-5">
+            <strong>MENU</strong>
+          </h4>
+          <div class="position-absolute top-0 end-0">
+            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addFood">
+              <strong><i class="fa-solid fa-plus me-2"></i><span class="text-css">THÊM MÓN ĂN</span></strong>
+            </button>
+            <!-- Modal -->
+            <div [hidden]="isModalShow" class="modal fade" id="addFood" tabindex="-1" role="dialog"
+              aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                      THÊM MÓN ĂN
+                    </h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form [formGroup]="addFood" (submit)="addFoodEvent($event)">
+                      <!-- Name input -->
+                      <div class="form-floating mb-4">
+                        <input type="text" id="name" class="form-control form-control-lg" formControlName="name" />
+                        <label class="form-label" for="name">Name</label>
+                        <div *ngIf="name && name.invalid && name.touched">
+                          <small id="nameError" class="form-text text-danger">Name Required</small>
+                        </div>
+                      </div>
+
+                      <!-- soLuong input -->
+                      <div class="form-floating mb-4">
+                        <input type="number" id="soLuong" class="form-control form-control-lg"
+                          formControlName="soLuong" />
+                        <label class="form-label" for="soLuong">Số Lượng</label>
+                        <div *ngIf="soLuong && soLuong.invalid && soLuong.touched">
+                          <small id="quantityError" class="form-text text-danger">Quantity Required</small>
+                        </div>
+                      </div>
+
+                      <!-- Price input -->
+                      <div class="form-floating mb-4">
+                        <input type="number" id="price" class="form-control form-control-lg" formControlName="price"
+                          placeholder="$xxx" />
+                        <label class="form-label" for="price">Price</label>
+                        <div *ngIf="price && price.invalid && price.touched">
+                          <small id="priceError" class="form-text text-danger">Price Required</small>
+                        </div>
+                      </div>
+
+                      <!-- Password input -->
+                      <div class="form-floating mb-4">
+                        <!-- <input type="password" id="pw" class="form-control form-control-lg" formControlName=password/> -->
+                        <div class="form-group">
+                          <label for="idLoai">Loai</label>
+                          <select class="form-control" id="idLoai" formControlName="idLoai" required>
+                            <option disabled [selected]="true" [ngValue]="null">
+                              Chọn Loại
+                            </option>
+                            <option *ngFor="let c of cate; index as i" value="{{ c.id }}">
+                              {{ c.name }}
+                            </option>
+                          </select>
+                        </div>
+                        <div *ngIf="idLoai && idLoai.invalid && idLoai.touched">
+                          <small id="categoryError" class="form-text text-danger">Category Required</small>
+                        </div>
+                      </div>
+
+                      <!-- Image -->
+                      <div class="mb-4">
+                        <label for="formFile" class="row form-label ms-1">Image</label><input
+                          (change)="onFileChange($event)" class="form-control" type="file" id="formFile" />
+                      </div>
+
+                      <!-- Submit button -->
+                      <button data-bs-dismiss="modal" type="submit" [disabled]="loading || addFood.invalid"
+                        class="btn btn-primary btn-lg btn-block" style="width: 100%">
+                        <ng-container *ngIf="loading">
+                          <app-my-spinner />
+                        </ng-container>
+                        <ng-container *ngIf="!loading"> Sign Up </ng-container>
+                      </button>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                      Close
+                    </button>
+                    <button type="button" type="submit" [disabled]="loading || addFood.invalid" form="addFood"
+                      class="btn btn-primary">
+                      <ng-container *ngIf="loading">
+                        <app-my-spinner />
+                      </ng-container>
+                      <ng-container *ngIf="!loading"> Add Food </ng-container>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr class="hr hr-blurry" />
+        <!-- <div class="row justify-content-center" >
+          <div class="col " *ngFor="let c of cates">
+            <button class="btn btn-outline-dark">{{c.name}}</button>
+          </div>
+          <hr class="hr hr-blurry mt-5" />
+        </div> -->
+        <ng-container *ngIf="loading">
+          <app-my-spinner />
+        </ng-container>
+        <ng-container *ngIf="!loading">
+          <div class="row">
+            <div class="col-lg-4 col-md-12 mb-4" *ngFor="
+                let f of foods | paginate : { itemsPerPage: 6, currentPage: p }
+              ">
+              
+              <div class="card">
+                
+                <div class="bg-image hover-overlay ripple imageHover x" data-mdb-ripple-color="light">
+                  
+                  <img src="{{ f.image }}" class="img-fluid" />
+                  <div class="overlay">
+                    <i class="fa fa-eye icon" aria-hidden="true" data-bs-toggle="modal"
+                      attr.data-bs-target="#Food_{{ f.id }}"></i>
+                    <i (click)="uploadFile.click()" class="fa-solid fa-image icon-editImage"></i>
+                    <i (click)="deleteFood(f)" class="fa-solid fa-trash icon-delete-food"></i>
+                    <input hidden #uploadFile type="file" id="uploadFile" class="hidden-input"
+                      
+                      (change)="onFileChangeEdit(f, $event)" />
+                  </div>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">{{ f.name }}</h5>
+
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item" *ngIf=" foodSelected !== f || !editSoLuong">
+                      Số Lượng Còn Lại: {{ f.soLuong }}
+                      <i (click)="EditButtonSoLuong(f)" class="fa-solid fa-pencil"></i>
+                    </li>
+                    <li class="list-group-item" *ngIf="foodSelected === f && editSoLuong ">
+                      <label class=".float-start" for="soLuong ">Số Lượng Còn Lại:</label>
+                      <input type="num" id="soLuong" name="soLuong" value={{f.soLuong}} style="width: 13%;"
+                        (keydown.Escape)="cancelEdit()" (blur)="cancelEdit()"
+                        (keydown.enter)="onSuccesChangeSoLuong(f, soLuong.value)"
+                        (keydown.Meta.enter)="onSuccesChangeSoLuong(f, soLuong.value)" #soLuong />
+                      <i (click)="cancelEdit()" class="fa-solid fa-x icon-right"></i>
+                    </li>
+
+                    <li class="list-group-item" *ngIf=" (foodSelected !== f || editPrice === false)">
+                      Đơn Giá: {{ f.price }} $
+                      <i (click)="EditButtonPrice(f)" class="fa-solid fa-pencil"></i>
+                    </li>
+                    <li class="list-group-item" *ngIf="foodSelected === f && editPrice">
+
+                      <label class=".float-start" for="price ">Đơn Giá:</label>
+                      <i class="fas fa-dollar-sign trailing"></i>
+                      <input type="num" id="price" name="price" value={{f.price}} style="width: 25%;"
+                        (keydown.Escape)="cancelEdit()" (blur)="cancelEdit()"
+                        (keydown.enter)="onSuccesChangePrice(f, price.value)"
+                        (keydown.Meta.enter)="onSuccesChangePrice(f, price.value)" #price />
+                      <i (click)="cancelEdit()" class="fa-solid fa-x icon-right"></i>
+                    </li>
+                    <li class="list-group-item active-food"
+                      *ngIf="f.active === true && (editActive === false|| foodSelected !== f)">
+                      Còn bán <i (click)="EditButtonActive(f)" class="fa-solid fa-pencil"></i>
+                    </li>
+                    <li class="list-group-item stop-food"
+                      *ngIf="f.active === false && (editActive === false || foodSelected !== f)">
+                      Tạm ngưng <i (click)="EditButtonActive(f)" class="fa-solid fa-pencil"></i>
+                    </li>
+                    <li class="list-group-item active-food" *ngIf="editActive && foodSelected === f">
+                      <select (change)="onSuccessChangeActive(f, active)" *ngIf="f.active === true"
+                        class="form-select text-center" aria-label="Default select example" #active>
+                        <option selected value={{f.active}}>Còn Bán</option>
+                        <option value={{!f.active}}>Tạm Ngưng</option>
+                      </select>
+                      <select (change)="onSuccessChangeActive(f, active)" *ngIf="f.active === false"
+                        class="form-select text-center" aria-label="Default select example" #active>
+                        <option selected value={{f.active}}>Tạm Ngưng</option>
+                        <option value={{!f.active}}>Còn Bán</option>
+                      </select>
+                      <i (click)="cancelEdit()" class="fa-solid fa-x icon-right"></i>
+                    </li>
+                  </ul>
+                </div>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                  attr.data-bs-target="#Food_{{ f.id }}">
+                  Launch demo modal
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="Food_{{ f.id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-xl">
+                    <div class="modal-content">
+                      <div class="modal-body">
+                        <img src="{{ f.image }}" class="w-100 img-modal img-fluid" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </ng-container>
+      </section>
+      <!--Section: Content-->
+    </tab>
+    <tab heading="GeeksforGeeks1" class="mt-4">
+      Tabs component in Angular ngx bootstrap 2
+    </tab>
+    <tab heading="GeeksforGeeks2" class="mt-4">
+      Tabs component in Angular ngx bootstrap 3
+    </tab>
+  </tabset>
+</div>

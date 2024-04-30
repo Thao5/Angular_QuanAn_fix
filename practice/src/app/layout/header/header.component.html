@@ -1,0 +1,438 @@
+<!--Main Navigation-->
+<header>
+  <!-- Navbar -->
+
+  <nav
+    *ngIf="user.vaiTro === 'ban'"
+    class="navbar bg-dark navbar-expand-lg navbar-dark d-none d-lg-block"
+    style="z-index: 2000"
+    id="First"
+  >
+    <div class="container-fluid">
+      <a
+        class="navbar-brand nav-link"
+        [routerLink]="['/']"
+        routerLinkActive="router-link-active"
+      >
+        <strong>NHOAM-NHOAM</strong>
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#navbarExample01"
+        aria-controls="navbarExample01"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarExample01">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item active">
+            <a
+              class="nav-link nav-1"
+              aria-current="page"
+              [routerLink]="['/home']"
+              routerLinkActive="router-link-active"
+              >HOME</a
+            >
+          </li>
+        </ul>
+        <ul class="navbar-nav d-flex flex-row">
+          <li class="nav-item">
+            <a
+              class="nav-link nav-1 position-relative"
+              [routerLink]="['/cartoff']"
+              routerLinkActive="router-link-active"
+            >
+              <span
+                class="badge rounded-pill bg-danger position-absolute top-0 start-0 translate-middle"
+              >
+                {{ counterdisplay }}
+              </span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-cart"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+                />
+              </svg>
+              GIỎ HÀNG
+            </a>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav d-flex flex-row Tenth ms-3">
+          <li class="nav-item me-3 me-lg-0">
+            <a
+              class="nav-link"
+              href="https://www.youtube.com/channel/UC5CF7mLQZhvx8O5GODZAhdA"
+              rel="nofollow"
+              target="_blank"
+            >
+              <i class="fab fa-youtube"></i>
+            </a>
+          </li>
+          <li class="nav-item me-3 me-lg-0">
+            <a
+              class="nav-link"
+              href="https://www.facebook.com/mdbootstrap"
+              rel="nofollow"
+              target="_blank"
+            >
+              <i class="fab fa-facebook-f"></i>
+            </a>
+          </li>
+          <li class="nav-item me-3 me-lg-0">
+            <a
+              class="nav-link"
+              href="https://twitter.com/MDBootstrap"
+              rel="nofollow"
+              target="_blank"
+            >
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+          <li class="nav-item me-3 me-lg-0">
+            <a
+              class="nav-link"
+              href="https://github.com/mdbootstrap/mdb-ui-kit"
+              rel="nofollow"
+              target="_blank"
+            >
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <nav
+    *ngIf="user.vaiTro !== 'ban'"
+    class="navbar bg-dark navbar-expand-lg navbar-dark"
+    style="z-index: 2000"
+    id="First"
+  >
+    <div class="container-fluid">
+      <!-- Navbar brand -->
+      <a
+        class="navbar-brand"
+        [routerLink]="['/']"
+        routerLinkActive="router-link-active"
+      >
+        <strong>NHOAM-NHOAM</strong>
+      </a>
+      <button
+        id="btncss"
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarExample01"
+        aria-controls="navbarExample01"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarExample01">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item active">
+            <a
+              class="nav-link nav-1"
+              aria-current="page"
+              [routerLink]="['/home']"
+              routerLinkActive="router-link-active"
+              >HOME</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link nav-1"
+              [routerLink]="['/introduce']"
+              routerLinkActive="router-link-active"
+              data-title="Second"
+              id="Second"
+              >GIỚI THIỆU</a
+            >
+          </li>
+          <li *ngIf="(user$ | async)?.isLogged === false" class="nav-item">
+            <a
+              class="nav-link nav-1"
+              [routerLink]="['/login']"
+              routerLinkActive="router-link-active"
+              id="Third"
+              >ĐĂNG NHẬP</a
+            >
+          </li>
+          <li *ngIf="(user$ | async)?.isLogged === false" class="nav-item">
+            <a
+              class="nav-link nav-1"
+              [routerLink]="['/register']"
+              routerLinkActive="router-link-active"
+              id="Forth"
+              >ĐĂNG KÝ</a
+            >
+            <!-- <a class="nav-link nav-1" [routerLink]="['/register']" routerLinkActive="router-link-active" id="Forth">{{(user$ | async)?.user.firstName}}</a>
+                      <a class="nav-link nav-1" [routerLink]="['/register']" routerLinkActive="router-link-active" id="Forth">{{(user$ | async)}}</a>
+                      <a class="nav-link nav-1" [routerLink]="['/register']" routerLinkActive="router-link-active" id="Forth">{{!(user$ | async)}}</a> -->
+          </li>
+          <li
+            *ngIf="(user$ | async)?.isLogged === true"
+            class="nav-item dropdown"
+          >
+            <a
+              class="nav-link dropdown-toggle nav-1"
+              href="#"
+              id="Third"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              {{ (user$ | async)?.user.firstName }}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li>
+                <a
+                  class="dropdown-item"
+                  [routerLink]="['/detail']"
+                  routerLinkActive="router-link-active"
+                  >Thông Tin Cá Nhân</a
+                >
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  [routerLink]="['/changepw']"
+                  routerLinkActive="router-link-active"
+                  >Đổi mật khẩu</a
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <button (click)="logout()" class="dropdown-item">
+                  ĐĂNG XUẤT
+                </button>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav">
+          <li id="resDes" class="nav-item Fifth">
+            <a
+              class="nav-link nav-1 position-relative"
+              [routerLink]="['/cart']"
+              routerLinkActive="router-link-active"
+            >
+              <span
+                class="badge rounded-pill bg-danger position-absolute top-0 start-0 translate-middle"
+              >
+                {{ counterdisplay }}
+              </span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-cart"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+                />
+              </svg>
+              GIỎ HÀNG
+            </a>
+          </li>
+
+          <li id="resMob" class="nav-item Fifth">
+            <a
+              class="nav-link nav-1 position-relative"
+              [routerLink]="['/cart']"
+              routerLinkActive="router-link-active"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-cart"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+                />
+              </svg>
+              GIỎ HÀNG
+              <span
+                class="position-absolute top-0 start-auto badge rounded-pill bg-danger"
+              >
+                {{ counterdisplay }}
+              </span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link nav-1"
+              [routerLink]="['/menu']"
+              routerLinkActive="router-link-active"
+              id="Sixth"
+              >THỰC ĐƠN</a
+            >
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link nav-1" (click)="routeTo()">ĐÁNH GIÁ</a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link nav-1"
+              [routerLink]="['/contact']"
+              routerLinkActive="router-link-active"
+              id="Eighth"
+              >LIÊN HỆ</a
+            >
+          </li>
+
+          <li class="nav-item ms-2">
+            <a
+              class="nav-link btn btn-outline-light btn-shadow-hover btn-shadow nav-1"
+              (click)="DatBan()"
+              id="Ninth"
+              >ĐẶT BÀN</a
+            >
+          </li>
+
+          <!-- Icons -->
+          <ul id="social" class="navbar-nav d-flex flex-row Tenth ms-3">
+            <li class="nav-item me-3 me-lg-0">
+              <a class="nav-link" href="#" rel="nofollow">
+                <i class="fab fa-youtube"></i>
+              </a>
+            </li>
+            <li class="nav-item me-3 me-lg-0">
+              <a
+                class="nav-link"
+                href="https://www.facebook.com/profile.php?id=100012229116926"
+                rel="nofollow"
+                target="_blank"
+              >
+                <i class="fab fa-facebook-f"></i>
+              </a>
+            </li>
+            <li class="nav-item me-3 me-lg-0">
+              <a class="nav-link" href="#" rel="nofollow">
+                <i class="fab fa-twitter"></i>
+              </a>
+            </li>
+            <li class="nav-item me-3 me-lg-0">
+              <a
+                class="nav-link"
+                href="https://github.com/HimhMinhHieu"
+                rel="nofollow"
+                target="_blank"
+              >
+                <i class="fab fa-github"></i>
+              </a>
+            </li>
+          </ul>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Navbar -->
+
+  <!-- Carousel wrapper -->
+  <div
+    *ngIf="user.vaiTro !== 'ban'"
+    id="introCarousel"
+    class="carousel slide carousel-fade shadow-2-strong Eleventh"
+    data-mdb-ride="carousel"
+  >
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li
+        data-mdb-target="#introCarousel"
+        data-mdb-slide-to="0"
+        class="active"
+      ></li>
+      <li data-mdb-target="#introCarousel" data-mdb-slide-to="1"></li>
+      <li data-mdb-target="#introCarousel" data-mdb-slide-to="2"></li>
+    </ol>
+
+    <!-- Inner -->
+    <div class="carousel-inner">
+      <!-- Single item -->
+      <div class="carousel-item active">
+        <div class="mask" style="background-color: rgba(0, 0, 0, 0.6)">
+          <div class="d-flex justify-content-center align-items-center h-100">
+            <div class="text-white text-center">
+              <h1 class="mb-3">NHOAM-NHOAM</h1>
+              <h5 class="mb-4">Best Restaurant & Best Food That You Need</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Single item -->
+      <div class="carousel-item">
+        <div class="mask" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="d-flex justify-content-center align-items-center h-100">
+            <div class="text-white text-center">
+              <h2>You deserve what you need and we serve what you want</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Single item -->
+      <div class="carousel-item">
+        <div class="mask">
+          <div class="d-flex justify-content-center align-items-center h-100">
+            <div class="text-white text-center">
+              <h2>Come to my Restaurant and enjoy</h2>
+              <button
+                class="btn btn-outline-light btn-lg m-2 btn-tour"
+                (click)="tour()"
+              >
+                Start Discovering
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Inner -->
+
+    <!-- Controls -->
+    <a
+      class="carousel-control-prev"
+      href="#introCarousel"
+      role="button"
+      data-mdb-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a
+      class="carousel-control-next"
+      href="#introCarousel"
+      role="button"
+      data-mdb-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+  <!-- Carousel wrapper -->
+</header>
+<!--Main Navigation-->

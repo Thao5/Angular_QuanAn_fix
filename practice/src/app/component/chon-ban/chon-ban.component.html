@@ -1,0 +1,45 @@
+
+<section class="text-center">
+  <h4 class="mb-1 mt-3"><strong>BÀN</strong>
+    <hr class="hr hr-blurry" />
+  </h4>
+  <!-- <div class="row justify-content-center" >
+    <div class="col " *ngFor="let c of cates">
+      <button class="btn btn-outline-dark">{{c.name}}</button>
+    </div>
+    <hr class="hr hr-blurry mt-5" />
+  </div> -->
+  <ng-container *ngIf="loading">
+    <app-my-spinner />
+  </ng-container>
+  <ng-container *ngIf="!loading">
+  <div class="row">
+    <div class="col-lg-3 col-md-12 mb-4" *ngFor="let b of ban">
+      <div class="card">
+        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+          <img
+            src="https://png.pngtree.com/png-vector/20190130/ourlarge/pngtree-hand-drawn-cartoon-table-and-delicious-food-available-for-commercial-elements-png-image_620285.jpg"
+            class="w-50 h-50"
+          />
+          <a href="#!">
+            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+          </a>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{b.id}}</h5>
+          <p class="card-text">
+            {{b.moTa}}
+          </p>
+          <button (click)="chonBan(b.id)" class="btn btn-primary">Đặt bàn</button>
+        </div>
+      </div>
+
+    </div>
+    <!-- <div *ngIf="!user" class="alert alert-danger" role="alert">
+      Bạn cần phải đăng nhập trước
+    </div> -->
+
+  </div>
+</ng-container>
+</section>
+

@@ -1,0 +1,46 @@
+
+  <img src={{user.avatar}} class="rounded-circle mx-auto d-block img-fluid w-25 h-25 mt-3" alt="image user" />
+  <table class="table table-hover table-striped table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Chi Tiết</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">ID</th>
+        <td>{{user.id}}</td>
+      </tr>
+      <tr>
+        <th scope="row">First Name</th>
+        <td>{{user.firstName}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Last Name</th>
+        <td>{{user.lastName}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Tài Khoản</th>
+        <td>{{user.taiKhoan}}</td>
+      </tr>
+      <tr>
+        <th scope="row"> Email</th>
+        <td>{{user.email}}</td>
+      </tr>
+      <tr>
+        <th scope="row">SDT</th>
+        <td>{{user.phone}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Vai Trò</th>
+        <td>{{user.vaiTro}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Active</th>
+        <td *ngIf="user.active === true">Hoạt Động</td>
+        <td *ngIf="user.active !== true">Bị Khóa</td>
+      </tr>
+    </tbody>
+  </table>
+<button class="btn btn-danger ms-3 mb-3" (click)="onClick()">Trở về trang chủ</button>

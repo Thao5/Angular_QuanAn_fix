@@ -1,0 +1,158 @@
+<head>
+  <meta
+    name="google-signin-client_id"
+    content="708090744448-i1iao1kj4sqj27ktlbt5f9k9aqh3sa3l.apps.googleusercontent.com"
+  />
+</head>
+<div
+  class="card d-flex justify-content-center align-items-center mb-4 ms-auto me-auto mt-4"
+  style="
+    width: 100%;
+    height: 100%;
+    text-align: center;
+  "
+>
+  <section>
+    <div class="container py-5 h-100">
+      <div class="row d-flex align-items-center justify-content-center h-100">
+        <div class="col-md-8 col-lg-7 col-xl-6">
+          <img
+            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+            class="img-fluid"
+            alt="Phone image"
+          />
+        </div>
+        <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+          <form [formGroup]="loginForm" (submit)="onSubmit()">
+            <!-- Username input -->
+            <div class="form-floating mb-4">
+              <input
+                type="text"
+                id="username"
+                class="form-control form-control-lg"
+                formControlName="taiKhoan"
+              />
+              <label class="form-label" for="username">Username</label>
+              <div *ngIf="taiKhoan && taiKhoan.invalid && taiKhoan.touched">
+                <small id="usernameError" class="form-text text-danger"
+                  >Username Required</small
+                >
+              </div>
+            </div>
+
+            <!-- Password input -->
+            <div class="form-floating mb-4">
+              <input
+                type="password"
+                id="password"
+                class="form-control form-control-lg"
+                formControlName="matKhau"
+              />
+              <label class="form-label" for="password">Password</label>
+              <div *ngIf="matKhau && matKhau.invalid && matKhau.touched">
+                <small id="passwordError" class="form-text text-danger"
+                  >Password Required</small
+                >
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-around align-items-center mb-4">
+              <!-- Checkbox -->
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="form1Example3"
+                  checked
+                />
+                <label class="form-check-label" for="form1Example3">
+                  Remember me
+                </label>
+              </div>
+              <a
+                [routerLink]="['/forgot']"
+                routerLinkActive="router-link-active"
+                >Forgot password?</a
+              >
+            </div>
+
+            <!-- Submit button -->
+            <button
+              type="submit"
+              [disabled]="loginForm.invalid"
+              class="btn btn-primary btn-lg btn-block"
+              style="width: 100%"
+            >
+              Sign in
+            </button>
+          </form>
+          <div class="divider align-items-center my-4">
+            <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
+          </div>
+          <div
+            class="d-flex flex-row align-items-center justify-content-center"
+          >
+            <p class="lead fw-normal mb-0 me-3 btn-dis">Sign in with</p>
+            <!-- Facebook -->
+            <div style="text-align: center, justify; " class="text-center">
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm">
+                    <a
+                      style="color: #3b5998; cursor: pointer"
+                      (click)="signInWithFB()"
+                      role="button" class="btn-dis"
+                      ><i class="fab fa-facebook-f fa-lg mx-3"></i
+                    ></a>
+
+
+                  </div>
+                  <!-- <div class="col-sm">
+                    Twitter
+                    <a style="color: #55acee" href="#!" role="button"
+                      ><i class="fab fa-twitter fa-lg mx-3"></i
+                    ></a>
+                  </div>
+                  <div class="col-sm">
+                    <a style="color: #ac2bac" href="#!" role="button"
+                      ><i class="fab fa-instagram fa-lg mx-3"></i
+                    ></a>
+                  </div> -->
+                  <div class="col-sm btn-dis">
+                    <!-- Google -->
+                    <asl-google-signin-button
+                      type="icon"
+                      size="medium"
+                    ></asl-google-signin-button>
+                  </div>
+                  <div class="col-sm loginBtn">
+                    <button class="loginBtn loginBtn--facebook">
+                      Login with Facebook
+                    </button>
+                    <!-- Google -->
+                    <asl-google-signin-button
+                      type="standard"
+                      size="large"
+                    ></asl-google-signin-button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="divider d-flex align-items-center my-4"></div>
+          <div class="d-flex align-items-center justify-content-center pb-4">
+            <p class="mb-0 me-2">Don't have an account?</p>
+            <a
+              [routerLink]="['/register']"
+              routerLinkActive="router-link-active"
+              class="btn btn-outline-primary"
+              style="margin-left: 1px"
+              >Create new</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

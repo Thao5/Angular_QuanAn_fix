@@ -1,0 +1,99 @@
+<div class="d-flex justify-content-around align-items-center mb-4" style="width: 65%; height: 83vh; text-align: center; margin: 2rem 2rem 5rem 15rem;">
+    <section>
+        <div class="container py-5 h-100">
+          <div class="row d-flex align-items-center justify-content-center h-100">
+            <div class="col-md-8 col-lg-7 col-xl-6">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+                class="img-fluid" alt="Phone image">
+            </div>
+            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+              <form [formGroup]="registerForm" (submit)="register($event)">
+                <!-- FirstName input -->
+                <div class="form-floating mb-4">
+                  <input type="text" id="firstName" class="form-control form-control-lg" formControlName=firstName/>
+                  <label class="form-label" for="firstName">First Name</label>
+                  <div  *ngIf="firstName && firstName.invalid && firstName.touched">
+                    <small id="usernameError" class="form-text  text-danger">Firs tName Required</small>
+                  </div>
+                </div>
+
+                <!-- LastName input -->
+                <div class="form-floating mb-4">
+                  <input type="text" id="lastName" class="form-control form-control-lg" formControlName=lastName />
+                  <label class="form-label" for="lastName">Last Name</label>
+                  <div  *ngIf="lastName && lastName.invalid && lastName.touched">
+                    <small id="usernameError" class="form-text  text-danger">Last Name Required</small>
+                  </div>
+                </div>
+
+                <!-- Username input -->
+                <div class="form-floating mb-4">
+                  <input type="text" id="username" class="form-control form-control-lg" formControlName=username />
+                  <label class="form-label" for="username">Username</label>
+                  <div  *ngIf="username && username.invalid && username.touched">
+                    <small id="usernameError" class="form-text  text-danger">Username Required</small>
+                  </div>
+                </div>
+
+                <!-- Password input -->
+                <div class="form-floating mb-4">
+                  <input type="password" id="pw" class="form-control form-control-lg" formControlName=password/>
+                  <label class="form-label" for="pw">Password</label>
+                  <div  *ngIf="password && password.invalid && password.touched">
+                    <small id="usernameError" class="form-text  text-danger">Password Required</small>
+                  </div>
+                </div>
+
+                <div class="form-floating mb-4">
+                  <input type="password" id="pwcf" class="form-control form-control-lg" formControlName=confirmPass/>
+                  <label class="form-label" for="pwcf">Confirm Password</label>
+                  <div  *ngIf="confirmPass && confirmPass.invalid && confirmPass.touched">
+                    <small id="usernameError" class="form-text  text-danger">Confirm Password Required</small>
+                  </div>
+                  <div  *ngIf="registerForm.errors?.['valuesNotMatch']">
+                    <small id="usernameError" class="form-text  text-danger">Mật khẩu không trùng khớp</small>
+                  </div>
+                </div>
+
+                <!-- Email input -->
+                <div class="form-floating mb-4">
+                  <input type="email" id="email" class="form-control form-control-lg" formControlName=email/>
+                  <label class="form-label" for="email">Email</label>
+                  <div  *ngIf="email && email.invalid && email.touched">
+                    <small id="usernameError" class="form-text  text-danger">Email Required</small>
+                  </div>
+                </div>
+
+                <!-- Phone input -->
+                <div class="form-floating mb-4">
+                  <input type="tel" pattern="[0-9]{1,11}" id="phone" class="form-control form-control-lg" formControlName=phone/>
+                  <label class="form-label" for="phone">Phone</label>
+                  <div  *ngIf="phone && phone.invalid && phone.touched">
+                    <small id="usernameError" class="form-text  text-danger">Phone Required</small>
+                  </div>
+                </div>
+
+                <!-- Image -->
+                <div class="mb-4">
+                  <label for="formFile" class="row form-label ms-1" >Avatar</label><input (change)="onFileChange($event)" class="form-control" type="file" id="formFile" >
+                </div>
+
+                <!-- Submit button -->
+                <button type="submit" [disabled]="loading || registerForm.invalid" class="btn btn-primary btn-lg btn-block" style="width: 100%;">
+                  <ng-container *ngIf="loading">
+                    <app-my-spinner />
+                  </ng-container>
+                  <ng-container *ngIf="!loading">
+                    Sign Up
+                  </ng-container>
+                </button>
+              </form>
+
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+</div>
+
